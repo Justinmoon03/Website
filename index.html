@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bransz SMP</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --blue:#4cc9f0;
+  --purple:#8b5cf6;
+  --text:#e5e7eb;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:Poppins}
+html{scroll-behavior:smooth}
+body{
+  color:var(--text);
+  background:#020312;
+  overflow-x:hidden;
+  overscroll-behavior:none;
+  -webkit-overflow-scrolling:touch;
+}
+
+/* BACKGROUND (FIX DESKTOP + SMOOTH) */
+.space-bg{
+  position:fixed;
+  top:-30%;
+  left:-30%;
+  width:160%;
+  height:160%;
+  z-index:-3;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(139,92,246,.45), transparent 45%),
+    radial-gradient(circle at 80% 80%, rgba(76,201,240,.45), transparent 45%),
+    linear-gradient(180deg,#020312,#050816);
+  background-size:200% 200%;
+  animation:bgMove 40s linear infinite;
+  will-change:background-position, transform;
+  pointer-events:none;
+  transform:translateZ(0);
+}
+
+@keyframes bgMove{
+  0%{background-position:0% 0%}
+  50%{background-position:100% 100%}
+  100%{background-position:0% 0%}
+}
+
+/* SHOOTING STAR */
+.shooting-star{
+  position:fixed;top:-30%;left:120%;
+  width:2px;height:220px;
+  background:linear-gradient(180deg,#fff,transparent);
+  transform:rotate(45deg) translateZ(0);
+  opacity:0;
+  animation:shoot 18s linear infinite;
+  z-index:-2;
+  will-change:transform,opacity;
+}
+@keyframes shoot{
+  0%{opacity:0}
+  20%{opacity:1}
+  55%{transform:translate(-2200px,1400px) rotate(45deg)}
+  100%{opacity:0}
+}
+
+/* HEADER */
+header{
+  position:sticky;top:0;z-index:100;
+  display:flex;justify-content:space-between;align-items:center;
+  padding:16px 22px;
+  backdrop-filter:blur(12px);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brand img{width:38px;height:38px;border-radius:10px;box-shadow:0 0 15px var(--blue)}
+.brand h1{font-size:22px;font-weight:700}
+
+/* MENU */
+.menu-dropdown{
+  display:none;position:fixed;top:70px;right:18px;
+  background:linear-gradient(160deg,#0d1440,#090f2e);
+  border-radius:18px;padding:14px;
+}
+.menu-dropdown a{
+  display:block;color:white;text-decoration:none;
+  padding:10px 14px;border-radius:12px;
+}
+.menu-dropdown a:hover{background:rgba(255,255,255,.08)}
+.menu-dropdown a.rank{
+  margin-top:6px;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+  color:#000;font-weight:700;
+}
+
+/* CONTAINER */
+.container{max-width:900px;margin:auto;padding:16px}
+
+/* CARD */
+.card{
+  background:linear-gradient(160deg,#0d1440,#090f2e);
+  border-radius:24px;
+  padding:18px;
+  margin-bottom:18px;
+  box-shadow:0 15px 40px rgba(0,0,0,.6);
+}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(40px)}
+.reveal.active{opacity:1;transform:none;transition:.8s ease}
+
+/* SERVER STATUS */
+.info{
+  display:flex;gap:14px;align-items:center;
+  padding:14px;border-radius:18px;
+  background:rgba(255,255,255,.05);
+  margin-bottom:12px;
+}
+.icon{font-size:26px}
+.label{font-size:12px;opacity:.7}
+.value{font-weight:600;word-break:break-word}
+
+/* STATUS */
+.status{display:flex;align-items:center;gap:10px;margin-top:10px}
+.dot{width:12px;height:12px;border-radius:50%;background:#777}
+.online{background:#22c55e;box-shadow:0 0 10px #22c55e}
+.offline{background:#ef4444;box-shadow:0 0 10px #ef4444}
+
+/* BUTTONS */
+.join-btn{
+  display:block;margin:18px 0;
+  padding:14px;border-radius:999px;
+  text-align:center;font-weight:700;
+  text-decoration:none;color:#000;
+  background:linear-gradient(90deg,var(--blue),var(--purple));
+}
+.socials{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.socials a{
+  padding:12px;border-radius:14px;
+  text-align:center;text-decoration:none;
+  background:rgba(255,255,255,.06);
+  color:white;
+  font-size:14px;
+}
+
+/* SECTION */
+.section{text-align:center;margin:40px 0 20px}
+.section small{color:var(--blue);letter-spacing:3px}
+.section h2{font-size:clamp(22px,4vw,26px)}
+
+/* FEATURES */
+.features-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(140px,1fr));
+  gap:14px;
+}
+
+/* GALLERY */
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(100px,1fr));
+  gap:12px;
+}
+.gallery-grid img{
+  width:100%;
+  height:120px;
+  object-fit:cover;
+  border-radius:16px;
+}
+
+footer{text-align:center;padding:28px;opacity:.6;font-size:14px}
+
+/* DESKTOP */
+@media(min-width:1024px){
+  .container{max-width:1100px}
+  .brand h1{font-size:24px}
+}
+</style>
+</head>
+
+<body>
+
+<div class="space-bg"></div>
+<div class="shooting-star"></div>
+
+<header>
+  <div class="brand">
+    <img src="logo.png">
+    <h1>Bransz SMP</h1>
+  </div>
+  <button onclick="toggleMenu()" style="background:none;border:none;color:white;font-size:26px">☰</button>
+</header>
+
+<div id="menuDropdown" class="menu-dropdown">
+  <a href="#home">Home</a>
+  <a href="#features">Features</a>
+  <a href="#gallery">Gallery</a>
+  <a href="https://discord.gg/jKwdz8b5ym" target="_blank">Discord</a>
+  <a href="shop.branzoffcial.my.id" class="rank">Rank</a>
+</div>
+
+<div class="container" id="home">
+
+<div class="card reveal">
+  <div class="info">
+    <div class="icon">🌐</div>
+    <div><div class="label">SERVER IP</div><div class="value">branzoffcial.my.id</div></div>
+  </div>
+  <div class="info">
+    <div class="icon">🔌</div>
+    <div><div class="label">PORT</div><div class="value">25684</div></div>
+  </div>
+  <div class="info">
+    <div class="icon">📦</div>
+    <div><div class="label">VERSION</div><div class="value">Java 1.17–1.21+ | Bedrock</div></div>
+  </div>
+
+  <div class="status">
+    <div id="dot" class="dot"></div>
+    <div id="status">Checking...</div>
+  </div>
+
+  <a href="https://chat.whatsapp.com/CkU1aHJlMR91iCIWk5CDk0" target="_blank" class="join-btn">Join Grup</a>
+
+  <div class="socials">
+    <a href="https://wa.me/6285167490302" target="_blank">WhatsApp</a>
+    <a href="https://whatsapp.com/channel/0029Vb7NIum7tkj8YShqpH3B" target="_blank">Saluran</a>
+    <a href="https://discord.gg/jKwdz8b5ym" target="_blank">Discord</a>
+  </div>
+</div>
+
+<div id="features" class="section reveal">
+  <small>SERVER FEATURES</small>
+  <h2>Fitur Unggulan</h2>
+</div>
+
+<div class="features-grid">
+  <div class="card reveal">🛡️ Claim Land</div>
+  <div class="card reveal">💰 Economy</div>
+  <div class="card reveal">🔥 Spawner</div>
+  <div class="card reveal">🎤 Voice Chat</div>
+  <div class="card reveal">⚔️ PvP</div>
+  <div class="card reveal">🤝 Java & Bedrock</div>
+</div>
+
+<div id="gallery" class="section reveal">
+  <small>SERVER GALLERY</small>
+  <h2>Kenangan Server</h2>
+</div>
+
+<div class="card reveal">
+  <div class="gallery-grid">
+    <img src="img1.jpg"><img src="img2.jpg"><img src="img3.jpg">
+    <img src="img4.jpg"><img src="img5.jpg"><img src="img6.jpg">
+  </div>
+</div>
+
+</div>
+
+<footer>@branszsmp2025</footer>
+
+<script>
+function toggleMenu(){
+  const m=document.getElementById("menuDropdown");
+  m.style.display=m.style.display==="block"?"none":"block";
+}
+
+const ip="branzoffcial.my.id",port="25684";
+fetch(`https://api.mcstatus.io/v2/status/java/${ip}:${port}`)
+.then(r=>r.json()).then(d=>{
+  const dot=document.getElementById("dot");
+  const status=document.getElementById("status");
+  if(d.online){
+    dot.classList.add("online");
+    status.innerText=`Online • ${d.players.online} pemain`;
+  }else{
+    dot.classList.add("offline");
+    status.innerText="Offline";
+  }
+});
+
+const reveals=document.querySelectorAll(".reveal");
+window.addEventListener("scroll",()=>reveals.forEach(el=>{
+  if(el.getBoundingClientRect().top<window.innerHeight-80)
+    el.classList.add("active");
+}));
+</script>
+
+</body>
+</html>
